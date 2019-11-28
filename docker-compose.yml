@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    networks:
+      - panel_network
+    ports:
+      - 3000:3000
+    environment:
+      - NODE_ENV=development
+    restart: on-failure
+
+networks:
+  panel_network:
+    driver: bridge
